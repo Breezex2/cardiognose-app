@@ -1,0 +1,149 @@
+<style>
+  td {
+    padding-bottom: 7px;
+  }
+</style>
+<div class="mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg mt-6 rounded-lg shadow-md" style="padding: 80px 200px 90px 200px">
+  <h2 class="my-5 text-2xl font-semibold text-gray-700 dark:text-gray-200 text-center">Create Patient Profile</h2>
+  <form id="patientCreateForm" style="font-size: 15px; margin-top: 25px;">
+    <table>
+      <tbody>
+      <tr>
+        <td style="padding-right: 100px;" class="text-gray-800 dark:text-gray-400">
+          <label for="civil_id">Civil ID </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="text" id="civil_id" name="civil_id" 
+            pattern="\d{7,8}" 
+            title="Civil ID must be 7 or 8 digits."
+            autocomplete="off" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="first_name">First Name </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="text" id="first_name" name="first_name" 
+            pattern="[A-Za-z]+(\s[A-Za-z]+)?" 
+            title="Only letters are allowed"
+            autocomplete="off" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="middle_name">Middle Name </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="text" id="middle_name" name="middle_name" 
+            pattern="[A-Za-z]+(\s[A-Za-z]+)?" 
+            title="Only letters are allowed"
+            autocomplete="off" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="last_name">Last Name </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="text" id="last_name" name="last_name" 
+            pattern="[A-Za-z]+(\s[A-Za-z]+)?" 
+            title="Only letters are allowed"
+            autocomplete="off" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="date_of_birth">Date of Birth </label>
+        </td>
+        <td>
+          <input 
+          type="date" id="date_of_birth" name="date_of_birth"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          style="height: 27px; width: 300px; text-align: center;" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="phone_number">Phone Number </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="tel" id="phone_number" name="phone_number" autocomplete="off" 
+            pattern="\d{8}" 
+            title="Phone number must be exactly 8 digits."
+            required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="email">Email </label>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center;" type="email" id="email" name="email" 
+            autocomplete="off" required>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="address">Address</label><br>
+        </td>
+        <td>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            style="height: 27px; width: 300px; text-align: center; resize: none;" type="text" id="address" name="address" autocomplete="off" required></input>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="arrhythmia_status">Arrhythmia Status </label>
+        </td>
+        <td>
+          <select id="arrhythmia_status" name="arrhythmia_status"
+          style="height: 27px; width: 300px; text-align: center;"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required>
+            <option value="unknown" selected>Unknown</option>
+            <option value="normal">Normal</option>
+            <option value="abnormal">Abnormal</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-gray-800 dark:text-gray-400">
+          <label for="is_active">Is Active </label>
+        </td>
+        <td>
+          <select id="is_active" name="is_active"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          style="height: 27px; width: 300px; text-align: center;" required>
+            <option value="1" selected>Yes</option>
+            <option value="0">No</option>
+          </select>
+        </td>
+      </tr>
+      <tr><td colspan="2" style="padding-top: 20px;" class="text-center">
+        <span
+        onclick="create_new_patient()"
+        class="flex items-center justify-between w-full px-4 py-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-teal-500 border border-transparent rounded-lg active:bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline-teal"
+        >Submit</span>
+      </td>
+      </tr>
+    </tbody>
+    </table>
+  </form>
+</div>
+
+<div id="response"></div>
+

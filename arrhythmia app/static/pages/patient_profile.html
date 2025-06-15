@@ -1,0 +1,288 @@
+<div class="patient-profile container mx-auto px-4 py-6">
+  <!-- Header -->
+
+  <div class="mt-6 mb-8 flex justify-between items-center">
+    <!-- Back button -->
+    <button
+      onclick="window.loadPage('patients_table')"
+      class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 text-sm"
+    >
+      ← Back to Patients Table
+    </button>
+
+    <!-- Delete button -->
+    <button
+      onclick="deletePatient('{{ patient.patient_id }}')"
+      class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm"
+    >
+      Delete Patient
+    </button>
+  </div>
+  <div class="card relative rounded-lg shadow-md p-3 mb-6 border bg-white">
+    <h3 class="profile-title text-xl font-semibold">Patient Profile</h3>
+  </div>
+  <div class="card relative rounded-lg shadow-md p-6 mb-6 border">
+    <h2
+      class="text-2xl font-semibold text-gray-700 dark:text-gray-200"
+      style="margin-top: 24px"
+    >
+      {{ patient.first_name }} {{ patient.last_name }}
+    </h2>
+    <p
+      class="text-gray-700 dark:text-gray-400"
+      style="font-size: 16px; margin: 0px 0px 30px 0px"
+    >
+      CIVIL ID {{patient.civil_id}}
+    </p>
+
+    <p
+      class="text-gray-700 dark:text-gray-400"
+      style="font-size: 12px; margin: 0px 0px 0px 15px"
+    >
+      Created at: {{patient.created_at.strftime('%d %b %Y, %I:%M %p')}}
+    </p>
+    <p
+      class="text-gray-700 dark:text-gray-400"
+      style="font-size: 12px; margin: 0px 0px 10px 15px"
+    >
+      Last update: {{patient.updated_at.strftime('%d %b %Y, %I:%M %p')}}
+    </p>
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+            >
+              <th class="px-4 py-3" colspan="3">Patient Properties</th>
+            </tr>
+          </thead>
+          <tbody
+            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+          >
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">First name</td>
+              <td class="px-4 py-3 text-sm">{{patient.first_name}}</td>
+              <td
+                class="px-4 py-3 text-sm"
+                style="color: #03989e; width: 100px"
+              >
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="First name"
+                  data-prop_value="{{patient.first_name}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Middle name</td>
+              <td class="px-4 py-3 text-sm">{{patient.middle_name}}</td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Middle name"
+                  data-prop_value="{{patient.middle_name}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Last name</td>
+              <td class="px-4 py-3 text-sm">{{patient.last_name}}</td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Last name"
+                  data-prop_value="{{patient.last_name}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <!--
+                    <tr class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3 text-sm">Civil id</td>
+                        <td class="px-4 py-3 text-sm">{{patient.civil_id}}</td>
+                        <td class="px-4 py-3 text-sm" style="color: #03989e;"><span data-patient-id="{{patient.patient_id}}"
+                                data-prop_name="Civil id" data-prop_value="{{patient.civil_id}}"
+                                onclick="editProperty(this)" onmouseover="this.style.cursor='pointer'"
+                                onmouseout="this.style.cursor='none'">edit</span></td>
+                    </tr>
+                    -->
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Date of birth</td>
+              <td class="px-4 py-3 text-sm">
+                {{patient.date_of_birth.strftime('%d %b %Y')}}
+              </td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Date of birth"
+                  data-prop_value="{{patient.date_of_birth}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Phone number</td>
+              <td class="px-4 py-3 text-sm">{{patient.phone_number}}</td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Phone number"
+                  data-prop_value="{{patient.phone_number}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Email</td>
+              <td class="px-4 py-3 text-sm">{{patient.email}}</td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Email"
+                  data-prop_value="{{patient.email}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Address</td>
+              <td class="px-4 py-3 text-sm">{{patient.address}}</td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Address"
+                  data-prop_value="{{patient.address}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">Status</td>
+              <td class="px-4 py-3 text-sm" id="arrhythmia_status">
+                {{patient.arrhythmia_status.value}}
+              </td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="Arrhythmia status"
+                  data-prop_value="{{patient.arrhythmia_status.value}}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">is Active?</td>
+              <td class="px-4 py-3 text-sm">
+                {{ 'Yes' if patient.is_active else 'No' }}
+              </td>
+              <td class="px-4 py-3 text-sm" style="color: #03989e">
+                <span
+                  data-patient-id="{{patient.patient_id}}"
+                  data-prop_name="is Active"
+                  data-prop_value="{{ 1 if patient.is_active else 0 }}"
+                  onclick="editProperty(this)"
+                  onmouseover="this.style.cursor='pointer'"
+                  onmouseout="this.style.cursor='none'"
+                  >edit</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="card relative rounded-lg shadow-md p-6 mb-6 border">
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <tbody>
+            <thead>
+              <tr
+                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+              >
+                <th class="px-4 py-3" colspan="3">
+                  Cardiognosis Detection using (DL CNN Model) - Upload Medical
+                  CSV or XML file
+                </th>
+              </tr>
+            </thead>
+          </tbody>
+
+          <tbody
+            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+          >
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">
+                <label
+                  for="fileUpload"
+                  id="uploadLabel"
+                  style="cursor: pointer; color: #03989e"
+                  >Upload File</label
+                >
+                <input
+                  type="file"
+                  id="fileUpload"
+                  accept=".csv,.xml"
+                  name="fileUpload"
+                  data-civil_id="{{patient.civil_id}}"
+                  data-patient_id="{{patient.patient_id}}"
+                  data-doctor_id="{{doctor_id}}"
+                  style="display: none"
+                />
+                <span style="padding-left: 10px; color: #747474" id="fileName"
+                  >No file chosen</span
+                >
+              </td>
+              <td class="px-4 py-3 text-sm"></td>
+              <td class="px-4 py-3 text-sm" style="text-align: right">
+                <p id="file_count">Uploaded files: {{ file_count }}</p>
+                <p style="margin-right: 20px; color: #03989e">
+                  <span
+                    id="view_files_spn"
+                    style="cursor: pointer"
+                    data-patient_id="{{patient.patient_id}}"
+                    data-patient_civil="{{patient.civil_id}}"
+                    onclick="view_uploaded_files(this)"
+                  >
+                    {% if file_count > 0 %} view files {% else %} {% endif %}
+                  </span>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="view_files_table_container"></div>
+  </div>
+</div>

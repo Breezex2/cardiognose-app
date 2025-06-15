@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Patient Analytics | Arrhythmia App</title>
+    <meta http-equiv="content-type" content="text-html; charset=utf-8" />
+
+    <script
+      type="text/javascript"
+      src="/static/jscharting/JSC/jscharting.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/static/jscharting/JSC/modules/types.js"
+    ></script>
+    <script type="text/javascript" src="/static/js/analytics.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .chart-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .chart-title {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+      }
+
+      .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .error-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ff4444;
+        color: white;
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .refresh-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .refresh-button:hover {
+        background: #45a049;
+      }
+
+      #ageChartDiv,
+      #arrhythmiaChartDiv {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <h2 class="chart-title">Patient Age Distribution</h2>
+      <div id="ageChartDiv"></div>
+    </div>
+
+    <div class="chart-container">
+      <h2 class="chart-title">Arrhythmia Status Distribution</h2>
+      <div id="arrhythmiaChartDiv"></div>
+    </div>
+  </body>
+</html>

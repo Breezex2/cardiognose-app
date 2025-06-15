@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/css/loginPage_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <nav>
+        <a href="#"><img src="static/images/logo.svg" alt="logo" /></a>
+        <!-- <span style="font-size: 44px; color: #e50914; font-family: CarroisApostrophe; user-select: none;">Cardiognose</span>  -->
+      </nav>
+      <div class="form-wrapper">
+        <h2>Sign In</h2>
+        <form id="loginForm" action="/login" method="post">
+          <div class="form-control">
+            <input type="text" id="username" name="username" required />
+            <label for="username">User name</label>
+          </div>
+  
+          <div class="form-control">
+            <input type="password" id="password" name="password" required />
+            <label for="password">Password</label>
+            <span class="password-toggle" id="password-toggle">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
+  
+          <button type="submit">Sign In</button>
+          <div class="form-help">
+            <div class="remember-me">
+              <input type="checkbox" id="remember_me" name="remember_me" />
+              <label for="remember-me">Remember me</label>
+            </div>
+            <a href="#">Need help?</a>
+          </div>
+          <span
+            id="error"
+            style="color: red; padding-top: 20px; position: absolute"
+            >{{ error or '' }}</span
+          >
+        </form>
+        <p>New to Cardiognose? <a href="#">Request access from the administrator.</a></p>
+        <small>
+            Discover the Power of Cardiognose
+Your intelligent companion for understanding and monitoring heart health.
+Simple. Smart. Designed with care.
+            <br><a href="#">Learn more.</a>
+        </small>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../static/js/login.js"></script>
+</body>
+</html>
