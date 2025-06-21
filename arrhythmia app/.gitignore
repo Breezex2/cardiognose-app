@@ -1,6 +1,0 @@
-venv/
-*.pyd
-*.dll
-*.lib
-__pycache__/
-*.pyc

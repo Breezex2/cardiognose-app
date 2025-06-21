@@ -84,17 +84,17 @@ function createAgeDistributionChart(data) {
         points: ageData,
       },
     ],
-    toolbar_items: {
-      "change chart type": {
-        type: "select",
-        position: "inside top left",
-        value: "Column",
-        items: ["Column", "Line", "Area"],
-        events_change: function (e) {
-          this.options({ type: e.value.toLowerCase() });
-        },
-      },
-    },
+    // toolbar_items: {
+    //   "change chart type": {
+    //     type: "select",
+    //     position: "inside top left",
+    //     value: "Column",
+    //     items: ["Column", "Line", "Area"],
+    //     events_change: function (val) {
+    //       this.options({ type: val.toLowerCase() });
+    //     },
+    //   },
+    // },
   });
 }
 
@@ -117,17 +117,17 @@ function createArrhythmiaChart(data) {
         points: arrhythmiaData,
       },
     ],
-    toolbar_items: {
-      "change chart type": {
-        type: "select",
-        position: "inside top left",
-        value: "Pie",
-        items: ["Pie", "Donut"],
-        events_change: function (e) {
-          this.options({ type: e.value.toLowerCase() });
-        },
-      },
-    },
+    // toolbar_items: {
+    //   "change chart type": {
+    //     type: "select",
+    //     position: "inside top left",
+    //     value: "Pie",
+    //     items: ["Pie", "Donut"],
+    //     events_change: function (val) {
+    //       this.options({ type: val === "Donut" ? "pie donut" : "pie" });
+    //     },
+    //   },
+    // },
   });
 }
 
@@ -186,16 +186,40 @@ function addRefreshButton() {
   document.body.appendChild(refreshButton);
 
   // Remove the button if the analytics page is unloaded
-  document
-    .getElementById("page-content")
-    .addEventListener("DOMSubtreeModified", function () {
-      if (!document.querySelector(".analytics-chart-container")) {
-        const existingButton = document.querySelector(".refresh-button");
-        if (existingButton) {
-          existingButton.remove();
+  // Deprecated DOMSubtreeModified replaced with MutationObserver
+  const pageContentObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.type === "childList" && mutation.removedNodes.length > 0) {
+        const analyticsContainerRemoved = Array.from(
+          mutation.removedNodes
+        ).some(
+          (node) =>
+            node.nodeType === 1 &&
+            node.querySelector(".analytics-chart-container")
+        );
+
+        if (
+          analyticsContainerRemoved ||
+          !document.querySelector(".analytics-chart-container")
+        ) {
+          const existingButton = document.querySelector(".refresh-button");
+          if (existingButton) {
+            existingButton.remove();
+            pageContentObserver.disconnect(); // Disconnect once button is removed
+          }
         }
       }
     });
+  });
+
+  // Start observing the #page-content div
+  const pageContentDiv = document.getElementById("page-content");
+  if (pageContentDiv) {
+    pageContentObserver.observe(pageContentDiv, {
+      childList: true,
+      subtree: true,
+    });
+  }
 }
 
 // Initial setup when analytics.js is loaded, only if not already initialized via loadPage

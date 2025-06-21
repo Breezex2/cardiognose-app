@@ -17,14 +17,19 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 0;
+      }
+
+      .charts-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 20px;
         padding: 20px;
-        background-color: #f5f5f5;
       }
 
       .chart-container {
-        max-width: 800px;
-        margin: 20px auto;
+        flex: 1;
+        max-width: 600px;
         padding: 20px;
         background: white;
         border-radius: 8px;
@@ -63,13 +68,13 @@
       }
 
       .refresh-button {
-        position: fixed;
+        position: relative;
         top: 20px;
-        right: 20px;
-        background: #4caf50;
+        left: 20px;
+        background: #03989e;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 8px 15px;
         border-radius: 4px;
         cursor: pointer;
         font-size: 14px;
@@ -77,7 +82,7 @@
       }
 
       .refresh-button:hover {
-        background: #45a049;
+        background: #067276;
       }
 
       #ageChartDiv,
@@ -88,14 +93,22 @@
     </style>
   </head>
   <body>
-    <div class="chart-container">
-      <h2 class="chart-title">Patient Age Distribution</h2>
-      <div id="ageChartDiv"></div>
-    </div>
 
-    <div class="chart-container">
-      <h2 class="chart-title">Arrhythmia Status Distribution</h2>
-      <div id="arrhythmiaChartDiv"></div>
+
+    <div class="charts-wrapper">
+      <div class="chart-container">
+        <h2 class="chart-title">Patient Age Distribution</h2>
+        <div id="ageChartDiv"></div>
+      </div>
+
+      <div class="chart-container">
+        <h2 class="chart-title">Arrhythmia Status Distribution</h2>
+        <div id="arrhythmiaChartDiv"></div>
+      </div>
     </div>
+        <!-- Refresh Button -->
+        <button class="refresh-button" onclick="window.initializeAnalyticsCharts()">
+          Refresh Data
+        </button>
   </body>
 </html>

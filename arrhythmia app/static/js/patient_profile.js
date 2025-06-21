@@ -461,9 +461,9 @@ function render_view_uploadedFilesTable(patient_id) {
           let imgsrc = "";
           let ext = item.file_path.split(".").pop().toLowerCase();
           if (ext === "xml") {
-            imgsrc = "static\\images\\xml.png";
+            imgsrc = "static\\images\\xml-icon.png";
           } else if (ext === "csv") {
-            imgsrc = "static\\images\\csv.png";
+            imgsrc = "static\\images\\csv-icon.png";
           } else {
             imgsrc = "static\\images\\file.png";
           }
@@ -576,11 +576,17 @@ async function draw_testing_img_result(patientId, medicalFilePath, file_id) {
         const td_details = document.createElement("td");
         td_details.className = `px-4 py-3 text-sm`;
         td_details.colSpan = 5;
-        data.images.forEach((url) => {
-          td_details.innerHTML += `
-                    <a href="${url}" target="_blank" style="cursor:pointer;"><img src="${url}" alt="ECG beat plot" style="width:50%; display:inline-block; float:left;"></img></a>
-                    `;
-        });
+        if (data.images.length > 0) {
+          const url = data.images.find(img => img.includes("original_beat_0"));
+          if (url) {
+            td_details.innerHTML = `
+              <a href="${url}" target="_blank" style="cursor:pointer;">
+                <img src="${url}" alt="ECG beat plot" style="width:50%; display:inline-block; float:left;">
+              </a>`;
+          } else {
+            td_details.innerHTML = "<p>No beat image found.</p>";
+          }
+        }
         row_details.appendChild(td_details);
         const referenceRow = document.getElementById(`tr_${file_id}`);
         referenceRow.parentNode.insertBefore(

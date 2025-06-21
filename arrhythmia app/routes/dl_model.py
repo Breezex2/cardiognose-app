@@ -163,10 +163,6 @@ def convert_ecg_xml_to_csv(xml_file_path, medical_csv_path):
 
         draw_ns = "{urn:oasis:names:tc:opendocument:xmlns:drawing:1.0}"
         
-        # We need to find the polylines that represent actual ECG signals.
-        # Based on visual inspection, they are long and contain many points.
-        # The relevant polylines are typically found under office:body/office:drawing/draw:page
-        
         # Find all draw:polyline tags within the drawing page
         # Note: Depending on XML structure, you might need a more specific XPath.
         all_polylines = root.findall(f'.//{draw_ns}polyline')
@@ -348,23 +344,21 @@ def predict_from_ecg_csv(csv_file_path, model, denoise_func, window_size, classe
         }
 
 
-        if plot_beats:
-            # Create the figure
+        # Plot only the first beat once for each lead (original, not scaled)
+        if plot_beats and i == 0:
             fig, axs = plt.subplots(1, 2, figsize=(15, 5))
 
-            axs[0].plot(preprocessed_beats_lead1[i])
-            axs[0].set_title(f"{lead1_col} (Scaled) - Predicted: {beat_label} ({confidence:.2f}%)")
+            axs[0].plot(original_beats_lead1[i])
+            axs[0].set_title(f"{lead1_col} (Original) - Predicted: {beat_label} ({confidence:.2f}%)")
             axs[0].grid(True)
-            axs[0].set_ylim(0, 1)
 
-            axs[1].plot(preprocessed_beats_lead2[i])
-            axs[1].set_title(f"{lead2_col} (Scaled) - Predicted: {beat_label} ({confidence:.2f}%)")
+            axs[1].plot(original_beats_lead2[i])
+            axs[1].set_title(f"{lead2_col} (Original) - Predicted: {beat_label} ({confidence:.2f}%)")
             axs[1].grid(True)
-            axs[1].set_ylim(0, 1)
 
             plt.tight_layout()
 
-            image_path = os.path.join(save_dir, f"beat_{i}.png")
+            image_path = os.path.join(save_dir, f"original_beat_0.png")
             plt.savefig(image_path)
             plt.close()
 

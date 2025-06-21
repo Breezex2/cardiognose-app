@@ -163,7 +163,7 @@ def index(request: Request):
 
 
 
-# Password validation logic (same as used earlier)
+# Password validation logic
 def validate_password(password: str):
     if not (8 <= len(password) <= 50):
         raise ValueError("Password must be between 8 and 50 characters.")
