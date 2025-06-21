@@ -4,8 +4,6 @@ import pytz
 from sqlalchemy import Column, Integer, String, Boolean, Date, Enum, DateTime, Text
 from database import Base
 
-
-
 class ArrhythmiaStatus(enum.Enum):
     normal = 'normal'
     RBBB = 'RBBB'
@@ -13,7 +11,6 @@ class ArrhythmiaStatus(enum.Enum):
     PVC = 'PVC'
     LBBB = 'LBBB'
     unknown = 'unknown'
-
 
 # Patient table model
 class Patient(Base):
@@ -33,8 +30,6 @@ class Patient(Base):
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(pytz.timezone("Asia/Muscat")))
     updated_at = Column(DateTime(timezone=True), default=lambda: datetime.now(pytz.timezone("Asia/Muscat")))
 
-
-
 class MedicalFile(Base):
     __tablename__ = 'medical_files'
 
@@ -47,8 +42,6 @@ class MedicalFile(Base):
     uploaded_date = Column(DateTime(timezone=True), default=lambda: datetime.now(pytz.timezone("Asia/Muscat")))
     updated_date = Column(DateTime(timezone=True), default=lambda: datetime.now(pytz.timezone("Asia/Muscat")))
     test_result = Column(Text)
-
-
 
 class UserRole(enum.Enum):
     admin = "admin"
@@ -68,3 +61,5 @@ class User(Base):
     address = Column(String(255), nullable=False)
     phone_number = Column(String(8), nullable=False)
     date_of_birth = Column(Date)
+
+    
