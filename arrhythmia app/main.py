@@ -13,9 +13,6 @@ from fastapi import Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
-
-
-
 app = FastAPI()
 
 app.add_middleware(SessionMiddleware, secret_key="v@#7H!p9z$W1k2Lm3XyZ4Q8rBn^Tu$e&GdHsJ0A6oPfCl9EkM") 
@@ -29,10 +26,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # Mount the uploads folder to serve static files
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-
 
 # Templates and static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -43,13 +38,9 @@ app.mount("/static/jscharting", StaticFiles(directory="static/jscharting"), name
 templates = Jinja2Templates(directory="templates")
 templates_pages = Jinja2Templates(directory="static/pages")
 
-
-
 @app.get("/", include_in_schema=False)
 def root():
     return RedirectResponse(url="/login")
-
-
 
 # Include routers
 app.include_router(auth_router)
